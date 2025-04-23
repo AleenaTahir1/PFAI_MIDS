@@ -1,0 +1,51 @@
+---
+title: "Machine Learning with caret"
+author: "Aleena Tahir"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r load_libraries, echo=TRUE}
+# Load the required libraries
+library(caret)
+library(dplyr)
+```
+
+```{r load_and_split_data, echo=TRUE}
+# Use the mtcars dataset
+data(mtcars)
+
+# Set a seed for reproducibility
+set.seed(123)
+
+# Split the data into training (80%) and testing (20%)
+train_index <- createDataPartition(mtcars$mpg, p = 0.8, list = FALSE)
+train_data  <- mtcars[train_index, ]
+test_data   <- mtcars[-train_index, ]
+```
+
+```{r preprocess_data, echo=TRUE}
+# Preprocess the data (scale all numeric features)
+preprocess_model <- preProcess(train_data, method = c("center", "scale"))
+train_scaled     <- predict(preprocess_model, train_data)
+test_scaled      <- predict(preprocess_model, test_data)
+```
+
+```{r train_model, echo=TRUE}
+# Train a linear regression model to predict mpg
+model <- train(mpg ~ ., data = train_scaled, method = "lm")
+```
+
+```{r make_predictions, echo=TRUE}
+# Make predictions on the test set
+predictions <- predict(model, newdata = test_scaled)
+```
+
+```{r evaluate_model, echo=TRUE}
+# Calculate RMSE (Root Mean Square Error)
+rmse_value <- RMSE(predictions, test_scaled$mpg)
+
+# Show the model summary and RMSE
+print(model)
+cat("RMSE on test data:", rmse_value, "\n")
+```

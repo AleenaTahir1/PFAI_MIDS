@@ -1,0 +1,26 @@
+---
+title: "Data Visualization using ggplot2"
+author: "Aleena Tahir"
+date: "2025-04-23"
+output: html_document
+---
+
+```{r scatter_mtcars, echo=TRUE}
+install.packages("ggplot2")
+
+# Load the ggplot2 package for making plots
+library(ggplot2)
+
+# Use the built-in mtcars dataset
+data(mtcars)
+
+# Create the scatter plot
+ggplot(mtcars, aes(x = wt, y = mpg)) +      # Set x as weight and y as miles per gallon
+  geom_point(color = "blue") +              # Add blue dots for each car
+  geom_smooth(method = "lm",                # Add a straight regression line
+              se = FALSE,                   # Don't show the shaded error area
+              color = "red") +              # Make the line red
+  labs(title = "Car Weight vs. Fuel Efficiency", # Add a title
+       x = "Weight (1000 lbs)",                 # Label for x-axis
+       y = "Miles per Gallon")                  # Label for y-axis
+```

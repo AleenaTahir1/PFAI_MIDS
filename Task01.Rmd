@@ -1,0 +1,23 @@
+---
+title: "Data Manipulation with dplyr"
+author: "Aleena Tahir"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r mtcars_dplyr, echo=TRUE}
+# Install the dplyr package 
+install.packages("dplyr")  
+
+# Load the dplyr library
+library(dplyr)
+
+# Filter rows from mtcars where mpg > 20 and arrange by descending hp
+result <- arrange(                 # Arrange the filtered data
+  filter(mtcars,          # Filter the 'mtcars' dataset
+         mpg > 20),       # Keep only rows where mpg is greater than 20
+  desc(hp))               # Arrange the result by horsepower (hp) in descending order
+
+# View the result
+print(result)
+```

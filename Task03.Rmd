@@ -1,0 +1,27 @@
+---
+title: "Statistical Analysis with Stats Package"
+author: "Aleena Tahir"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r load_stats, echo=TRUE}
+# Load the built-in stats package (automatically available in R)
+library(stats)
+```
+
+```{r create_sample_data, echo=TRUE}
+# Create a sample numeric vector (e.g., test scores, weights, etc.)
+sample_data <- c(12, 15, 9, 11, 13, 10, 14)
+```
+
+```{r perform_t_test, echo=TRUE}
+# Use the t.test() function from the stats package to perform a one-sample t-test
+# We are testing if the mean of sample_data is significantly different from 10
+t_test_result <- stats::t.test(sample_data, mu = 10)
+```
+
+```{r print_result, echo=TRUE}
+# Print the result of the t-test
+print(t_test_result)
+```
